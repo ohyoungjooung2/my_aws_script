@@ -1,0 +1,7 @@
+export PYTHONPATH=/home/oyj/ansible/ansible-2.7.6/lib
+#export ANSIBLE_MODULE_PATH=/home/oyj/ansible/ansible-2.7/lib/ansible
+export ANSIBLE_CONFIG=/home/oyj/ansible/config/ansible.cfg
+export ANSIBLE_HOST_KEY_CHECKING=False
+export ANSIBLE_HOME=/home/oyj/ansible/ansible-2.7.6
+export ANSIBLE_ROOT=/home/oyj/ansible/ansible-2.7.6
+alias 'ap=$ANSIBLE_HOME/bin/ansible-playbook'
