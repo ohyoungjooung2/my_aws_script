@@ -14,7 +14,8 @@ def check_num_first(res):
 
 
 def get_users():
-    im = boto3.client('iam')
+    session = boto3.Session(profile_name='mfa')
+    im = session.client('iam')
     try:
         result=im.get_credential_report() 
     except:
