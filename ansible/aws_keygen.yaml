@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  tasks:
+
+  - name: create key
+    ec2_key: name=mykey2 region=ap-northeast-2
+    register: keypair
+
+  - name: write the key to a file
+    copy:
+      dest: ./mykey2.pem
+      content: "{{ keypair.key.private_key }}"
+      mode: 0600
+    when: keypair.changed
