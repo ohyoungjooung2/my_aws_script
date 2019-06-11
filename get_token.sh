@@ -7,7 +7,7 @@ then
 fi
 
 DS=129600
-ARNMFA="arn:aws:iam::xxxxxxxxxxxx:mfa/tester"
+ARNMFA="arn:aws:iam::136517587526:mfa/tester"
 DFILE="$HOME/.aws/credentials"
 #AWG=$(aws sts get-session-token --serial-number $ARNMFA --token-code $1)
 AWG=$(aws sts get-session-token --serial-number $ARNMFA --token-code $1 --duration-seconds $DS)
@@ -21,6 +21,10 @@ echo $ST
 sed -i "2s%.*%aws_access_key_id = $AID%g" $DFILE
 sed -i "3s%.*%aws_secret_access_key = $SGK%g" $DFILE
 sed -i "4s%.*%aws_session_token = $ST%g" $DFILE
+
+echo "export AWS_ACCESS_KEY_ID=$AID" > ~/.bash_profile
+echo "export AWS_SECRET_ACCESS_KEY=$SGK" >> ~/.bash_profile
+echo "export AWS_SESSION_TOKEN=$ST" >> ~/.bash_profile
 
 if [[ $? == "0" ]]
 then
