@@ -1,2 +1,5 @@
 *.pem
+<<<<<<< HEAD
 .terraform
+=======
+>>>>>>> d43c9e7c73661eac30b7fa964ea2a5c8260af0c8

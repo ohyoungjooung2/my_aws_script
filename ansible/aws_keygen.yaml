@@ -5,12 +5,20 @@
   tasks:
 
   - name: create key
+<<<<<<< HEAD
     ec2_key: name=main_key region=ap-northeast-2 profile=mfa
+=======
+    ec2_key: name=mykey2 region=ap-northeast-2
+>>>>>>> d43c9e7c73661eac30b7fa964ea2a5c8260af0c8
     register: keypair
 
   - name: write the key to a file
     copy:
+<<<<<<< HEAD
       dest: ./main_key.pem
+=======
+      dest: ./mykey2.pem
+>>>>>>> d43c9e7c73661eac30b7fa964ea2a5c8260af0c8
       content: "{{ keypair.key.private_key }}"
       mode: 0600
     when: keypair.changed
