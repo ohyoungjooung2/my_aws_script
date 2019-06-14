@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  tasks:
+
+  - name: create key
+    ec2_key: name=main_key region=ap-northeast-2 profile=mfa
+    register: keypair
+
+  - name: write the key to a file
+    copy:
+      dest: ./main_key.pem
+      content: "{{ keypair.key.private_key }}"
+      mode: 0600
+    when: keypair.changed
