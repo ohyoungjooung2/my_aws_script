@@ -1,0 +1,27 @@
+1. Create egress 3333 to 8.8.8.8 port. (3333 to 8.8.8.8 is not practical!^^)
+aws ec2 authorize-security-group-egress --group-id sg-19e96c74 --ip-permissions IpProtocol=tcp,FromPort=3333,\
+ToPort=3333,IpRanges='[{CidrIp=8.8.8.8/32,Description='Test'}]'
+
+
+oyj@controller:~$ aws ec2 describe-security-groups --group-id sg-19e96c74 --output=text
+SECURITYGROUPS	default VPC security group	sg-19e96c74	default	136517587526	vpc-02af4a69
+IPPERMISSIONS	22	tcp	22
+IPRANGES	0.0.0.0/0
+IPPERMISSIONSEGRESS		-1	
+IPRANGES	0.0.0.0/0
+IPPERMISSIONSEGRESS	3333	tcp	3333
+IPRANGES	8.8.8.8/32	Test
+
+
+2. Delete rule..
+aws ec2 revoke-security-group-egress --group-id sg-19e96c74 --ip-permissions IpProtocol=tcp,FromPort=3333,ToPort=3333,IpRanges='[{CidrIp=8.8.8.8/32}]'
+
+oyj@controller:~$ aws ec2 revoke-security-group-egress --group-id sg-19e96c74 --ip-permissions IpProtocol=tcp,FromPort=3333,ToPort=3333,IpRanges='[{CidrIp=8.8.8.8/32,Description='Test'}]'
+oyj@controller:~$ aws ec2 describe-security-groups --group-id sg-19e96c74 --output=text
+SECURITYGROUPS	default VPC security group	sg-19e96c74	default	136517587526	vpc-02af4a69
+IPPERMISSIONS	22	tcp	22
+IPRANGES	0.0.0.0/0
+IPPERMISSIONSEGRESS	-1
+IPRANGES	0.0.0.0/0
+
+
